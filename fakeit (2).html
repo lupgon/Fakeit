@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fake It">
+<meta name="theme-color" content="#534AB7">
+<title>Fake It — El Impostor</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+  html, body { height: 100%; background: #0e0e12; color: #f0effe; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; overflow-x: hidden; }
+
+  .screen { display: none; flex-direction: column; min-height: 100svh; padding: 48px 24px 40px; }
+  .screen.active { display: flex; }
+
+  .logo { text-align: center; margin-bottom: 4px; }
+  .logo-icon { font-size: 56px; }
+  h1 { font-size: 32px; font-weight: 700; text-align: center; letter-spacing: -0.5px; color: #c4bfff; margin-bottom: 4px; }
+  .tagline { font-size: 15px; color: #7a7596; text-align: center; margin-bottom: 36px; }
+  .section-label { font-size: 13px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+
+  .number-selector { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 32px; background: #1a1a24; border-radius: 20px; padding: 16px; }
+  .num-btn { width: 56px; height: 56px; border-radius: 50%; font-size: 26px; font-weight: 500; border: 1.5px solid #3a3555; background: #252535; color: #c4bfff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .num-btn:active { background: #3a3555; }
+  #num-display { font-size: 40px; font-weight: 700; min-width: 56px; text-align: center; color: #fff; }
+
+  .input-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .input-list input { padding: 15px 18px; border-radius: 14px; border: 1.5px solid #2a2a3a; background: #1a1a24; color: #f0effe; font-size: 17px; font-family: inherit; outline: none; user-select: text; -webkit-user-select: text; }
+  .input-list input::placeholder { color: #4a4666; }
+  .input-list input:focus { border-color: #7F77DD; background: #1e1d2e; }
+
+  .btn { width: 100%; padding: 17px; border-radius: 16px; font-size: 17px; font-weight: 600; border: none; cursor: pointer; margin-bottom: 12px; transition: transform .1s, opacity .1s; font-family: inherit; }
+  .btn:active { transform: scale(0.97); opacity: .85; }
+  .btn.primary { background: #534AB7; color: #fff; }
+  .btn.secondary { background: #1a1a24; color: #c4bfff; border: 1.5px solid #3a3555; }
+  .btn.success { background: #0F6E56; color: #e1f5ee; }
+  .btn:disabled { opacity: .35; pointer-events: none; }
+
+  .progress-bar { display: flex; gap: 6px; margin-bottom: 28px; }
+  .progress-dot { flex: 1; height: 4px; border-radius: 99px; background: #2a2a3a; }
+  .progress-dot.done { background: #7F77DD; }
+  .progress-dot.active { background: #c4bfff; }
+
+  .player-card { background: #1a1a24; border-radius: 20px; padding: 20px 24px; text-align: center; margin-bottom: 24px; border: 1.5px solid #2a2a3a; }
+  .player-label { font-size: 12px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+  .player-name { font-size: 26px; font-weight: 700; color: #fff; }
+
+  .cover-box { background: #000; border-radius: 20px; padding: 32px 24px; text-align: center; margin-bottom: 24px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  .cover-box .cover-icon { font-size: 48px; }
+  .cover-box .cover-title { font-size: 19px; font-weight: 600; color: #fff; }
+  .cover-box .cover-sub { font-size: 14px; color: #555; }
+
+  .reveal-box { background: #1a1a24; border-radius: 20px; padding: 36px 24px; text-align: center; margin-bottom: 24px; flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; border: 1.5px solid #3a3555; }
+  .reveal-label { font-size: 13px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+  .reveal-word { font-size: 40px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; line-height: 1.1; }
+  .reveal-word.normal { color: #c4bfff; }
+  .reveal-word.impostor { color: #F0997B; }
+  .reveal-badge { display: inline-block; padding: 5px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
+  .reveal-badge.normal { background: #1e1d40; color: #9992d8; }
+  .reveal-badge.impostor { background: #2a1510; color: #F0997B; }
+
+  .discuss-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+  .discuss-icon { font-size: 72px; }
+  .discuss-title { font-size: 26px; font-weight: 700; color: #fff; }
+  .discuss-body { font-size: 16px; color: #7a7596; line-height: 1.6; max-width: 300px; }
+
+  .vote-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .vote-item { display: flex; align-items: center; padding: 18px 20px; border-radius: 16px; border: 1.5px solid #2a2a3a; background: #1a1a24; cursor: pointer; font-size: 18px; font-weight: 500; color: #d0cdf5; }
+  .vote-item:active { background: #252535; }
+  .vote-item.selected { border-color: #7F77DD; background: #1e1d40; color: #fff; }
+  .vote-item .vote-check { margin-left: auto; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #3a3555; background: #252535; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .vote-item.selected .vote-check { background: #534AB7; border-color: #7F77DD; color: #fff; }
+
+  .result-hero { background: #1a1a24; border-radius: 20px; padding: 28px 20px; text-align: center; margin-bottom: 14px; border: 1.5px solid #2a2a3a; }
+  .result-emoji { font-size: 56px; margin-bottom: 8px; }
+  .result-outcome { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .result-outcome.win { color: #5DCAA5; }
+  .result-outcome.lose { color: #F0997B; }
+  .result-sub { font-size: 14px; color: #7a7596; }
+
+  .result-row { background: #1a1a24; border-radius: 16px; padding: 16px 20px; margin-bottom: 10px; border: 1.5px solid #2a2a3a; }
+  .result-row-label { font-size: 12px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+  .result-row-value { font-size: 20px; font-weight: 700; color: #fff; }
+  .result-row-hint { font-size: 13px; color: #7a7596; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ══ SETUP ══ -->
+<div id="s-setup" class="screen active">
+  <div class="logo"><span class="logo-icon">🎭</span></div>
+  <h1>Fake It</h1>
+  <p class="tagline">Encuentra al impostor entre ustedes</p>
+  <p class="section-label">Número de jugadores</p>
+  <div class="number-selector">
+    <button class="num-btn" onclick="changeNum(-1)">−</button>
+    <span id="num-display">4</span>
+    <button class="num-btn" onclick="changeNum(1)">+</button>
+  </div>
+  <p class="section-label">Nombres</p>
+  <div class="input-list" id="names-list"></div>
+  <button class="btn primary" onclick="startGame()">Iniciar juego</button>
+</div>
+
+<!-- ══ TURNO ══ -->
+<div id="s-turn" class="screen">
+  <div class="progress-bar" id="progress-bar"></div>
+  <div class="player-card">
+    <div class="player-label">Le toca a</div>
+    <div class="player-name" id="turn-player-name"></div>
+  </div>
+  <div class="cover-box" id="black-cover">
+    <span class="cover-icon">🙈</span>
+    <span class="cover-title">Solo tú puedes ver esto</span>
+    <span class="cover-sub">Asegúrate de que nadie más mire la pantalla</span>
+  </div>
+  <div class="reveal-box" id="word-reveal">
+    <div class="reveal-label" id="reveal-label"></div>
+    <div class="reveal-word" id="reveal-word"></div>
+    <span class="reveal-badge" id="reveal-badge"></span>
+  </div>
+  <button class="btn primary" id="reveal-btn" onclick="revealWord()">👆 Toca para ver tu palabra</button>
+  <button class="btn secondary" id="hide-btn" style="display:none" onclick="nextTurn()">Ocultar y pasar →</button>
+</div>
+
+<!-- ══ DISCUSIÓN ══ -->
+<div id="s-discuss" class="screen">
+  <div class="discuss-center">
+    <span class="discuss-icon">💬</span>
+    <p class="discuss-title">¡A discutir!</p>
+    <p class="discuss-body">Cada quien da una pista sobre la palabra sin decirla directamente.<br><br>El impostor solo tiene una pista vaga — ¡intenta no delatarte!</p>
+  </div>
+  <button class="btn primary" onclick="goToVote()">Votar al impostor →</button>
+</div>
+
+<!-- ══ VOTACIÓN ══ -->
+<div id="s-vote" class="screen">
+  <h1 style="font-size:26px;margin-bottom:6px;text-align:left">Votación</h1>
+  <p style="font-size:15px;color:#7a7596;margin-bottom:24px">Elijan juntos quién creen que es el impostor</p>
+  <div class="vote-list" id="vote-list"></div>
+  <button class="btn success" id="vote-confirm" onclick="showResult()" disabled>Revelar resultado</button>
+</div>
+
+<!-- ══ RESULTADO ══ -->
+<div id="s-result" class="screen">
+  <h1 style="font-size:26px;margin-bottom:20px;text-align:left">Resultado</h1>
+  <div class="result-hero">
+    <div class="result-emoji" id="r-emoji"></div>
+    <div class="result-outcome" id="r-outcome"></div>
+    <div class="result-sub" id="r-sub"></div>
+  </div>
+  <div class="result-row">
+    <div class="result-row-label">El grupo votó por</div>
+    <div class="result-row-value" id="r-voted"></div>
+  </div>
+  <div class="result-row">
+    <div class="result-row-label">El impostor era</div>
+    <div class="result-row-value" id="r-impostor"></div>
+  </div>
+  <div class="result-row">
+    <div class="result-row-label">La palabra secreta</div>
+    <div class="result-row-value" id="r-word"></div>
+    <div class="result-row-hint">Categoría: <span id="r-cat"></span> · Pista que tenía el impostor: "<span id="r-hint"></span>"</div>
+  </div>
+  <button class="btn primary" onclick="restart()" style="margin-top:8px">Jugar de nuevo 🎭</button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  Regla de pistas: UNA sola palabra, no obvia.
+//  Debe relacionarse con la palabra pero no describirla
+//  directamente — el impostor puede blufear con ella.
+// ══════════════════════════════════════════════════════
+const palabras = [
+
+  // ── Personajes conocidos ──
+  { palabra:"Cleopatra",          pista:"serpiente",      categoria:"personaje" },
+  { palabra:"Einstein",           pista:"patente",        categoria:"personaje" },
+  { palabra:"Napoleón",           pista:"isla",           categoria:"personaje" },
+  { palabra:"Frida Kahlo",        pista:"columna",        categoria:"personaje" },
+  { palabra:"Gandhi",             pista:"ayuno",          categoria:"personaje" },
+  { palabra:"Shakespeare",        pista:"Globe",          categoria:"personaje" },
+  { palabra:"Marie Curie",        pista:"radiación",      categoria:"personaje" },
+  { palabra:"Nikola Tesla",       pista:"bobina",         categoria:"personaje" },
+  { palabra:"Darwin",             pista:"Galápagos",      categoria:"personaje" },
+  { palabra:"Julio César",        pista:"senado",         categoria:"personaje" },
+  { palabra:"Simón Bolívar",      pista:"libertador",     categoria:"personaje" },
+  { palabra:"Leonardo da Vinci",  pista:"espejo",         categoria:"personaje" },
+  { palabra:"Mozart",             pista:"niño",           categoria:"personaje" },
+  { palabra:"Juana de Arco",      pista:"llamas",         categoria:"personaje" },
+  { palabra:"Marco Polo",         pista:"seda",           categoria:"personaje" },
+
+  // ── Personajes ficción / pop ──
+  { palabra:"Sherlock Holmes",    pista:"violín",         categoria:"ficción" },
+  { palabra:"Darth Vader",        pista:"traición",       categoria:"ficción" },
+  { palabra:"James Bond",         pista:"Aston",          categoria:"ficción" },
+  { palabra:"El Joker",           pista:"naipes",         categoria:"ficción" },
+  { palabra:"Walter White",       pista:"sótano",         categoria:"ficción" },
+  { palabra:"Harry Potter",       pista:"cicatriz",       categoria:"ficción" },
+  { palabra:"Don Quijote",        pista:"molino",         categoria:"ficción" },
+  { palabra:"El Padrino",         pista:"caballo",        categoria:"ficción" },
+  { palabra:"Hermione Granger",   pista:"tiempo",         categoria:"ficción" },
+  { palabra:"Tony Stark",         pista:"reactor",        categoria:"ficción" },
+  { palabra:"Gollum",             pista:"cueva",          categoria:"ficción" },
+  { palabra:"Hannibal Lecter",    pista:"máscara",        categoria:"ficción" },
+  { palabra:"Indiana Jones",      pista:"látigo",         categoria:"ficción" },
+  { palabra:"Katniss Everdeen",   pista:"tributo",        categoria:"ficción" },
+  { palabra:"Batman",             pista:"murciélago",     categoria:"ficción" },
+
+  // ── Eventos mundiales ──
+  { palabra:"Chernóbil",          pista:"grafito",        categoria:"evento" },
+  { palabra:"El Titanic",         pista:"iceberg",        categoria:"evento" },
+  { palabra:"La Guerra Fría",     pista:"cortina",        categoria:"evento" },
+  { palabra:"La Revolución Francesa", pista:"guillotina", categoria:"evento" },
+  { palabra:"El Muro de Berlín",  pista:"maza",           categoria:"evento" },
+  { palabra:"La Gran Depresión",  pista:"quiebre",        categoria:"evento" },
+  { palabra:"Hiroshima",          pista:"hongo",          categoria:"evento" },
+  { palabra:"Watergate",          pista:"grabación",      categoria:"evento" },
+  { palabra:"La Pandemia",        pista:"variante",       categoria:"evento" },
+  { palabra:"El Renacimiento",    pista:"mecenas",        categoria:"evento" },
+  { palabra:"La Conquista",       pista:"Tenochtitlan",   categoria:"evento" },
+  { palabra:"La Inquisición",     pista:"confesión",      categoria:"evento" },
+  { palabra:"La Primavera Árabe", pista:"tunesino",       categoria:"evento" },
+  { palabra:"La Revolución Industrial", pista:"vapor",    categoria:"evento" },
+  { palabra:"El Apartheid",       pista:"Mandela",        categoria:"evento" },
+
+  // ── Ciudades ──
+  { palabra:"Venecia",            pista:"góndola",        categoria:"ciudad" },
+  { palabra:"Tokio",              pista:"shibuya",        categoria:"ciudad" },
+  { palabra:"Dubái",              pista:"petróleo",       categoria:"ciudad" },
+  { palabra:"La Habana",          pista:"tabaco",         categoria:"ciudad" },
+  { palabra:"Estambul",           pista:"bósforo",        categoria:"ciudad" },
+  { palabra:"Praga",              pista:"alquimia",       categoria:"ciudad" },
+  { palabra:"Amsterdam",          pista:"tulipán",        categoria:"ciudad" },
+  { palabra:"Buenos Aires",       pista:"milonga",        categoria:"ciudad" },
+  { palabra:"Singapur",           pista:"multa",          categoria:"ciudad" },
+  { palabra:"Moscú",              pista:"zar",            categoria:"ciudad" },
+  { palabra:"Marrakech",          pista:"zoco",           categoria:"ciudad" },
+  { palabra:"Reikiavik",          pista:"aurora",         categoria:"ciudad" },
+  { palabra:"El Vaticano",        pista:"cónclave",       categoria:"ciudad" },
+  { palabra:"Río de Janeiro",     pista:"favela",         categoria:"ciudad" },
+  { palabra:"Mumbai",             pista:"dabbawala",      categoria:"ciudad" },
+
+  // ── Ciencia y conceptos ──
+  { palabra:"Agujero negro",      pista:"horizonte",      categoria:"ciencia" },
+  { palabra:"ADN",                pista:"nucleótido",     categoria:"ciencia" },
+  { palabra:"Vacuna",             pista:"antígeno",       categoria:"ciencia" },
+  { palabra:"Evolución",          pista:"adaptación",     categoria:"ciencia" },
+  { palabra:"Gravedad",           pista:"curvatura",      categoria:"ciencia" },
+  { palabra:"Big Bang",           pista:"expansión",      categoria:"ciencia" },
+  { palabra:"Clonación",          pista:"oveja",          categoria:"ciencia" },
+  { palabra:"Inteligencia Artificial", pista:"neuronal",  categoria:"ciencia" },
+  { palabra:"Efecto invernadero", pista:"metano",         categoria:"ciencia" },
+  { palabra:"Fotosíntesis",       pista:"cloroplasto",    categoria:"ciencia" },
+  { palabra:"Relatividad",        pista:"gemelo",         categoria:"ciencia" },
+  { palabra:"Blockchain",         pista:"nodo",           categoria:"ciencia" },
+  { palabra:"Cuántica",           pista:"superposición",  categoria:"ciencia" },
+  { palabra:"Antimateria",        pista:"colisionador",   categoria:"ciencia" },
+  { palabra:"Neurona",            pista:"sinapsis",       categoria:"ciencia" },
+
+  // ── Cultura general ──
+  { palabra:"Los Juegos Olímpicos", pista:"tregua",       categoria:"cultura" },
+  { palabra:"El Oscar",           pista:"academia",       categoria:"cultura" },
+  { palabra:"La Mona Lisa",       pista:"Louvre",         categoria:"cultura" },
+  { palabra:"Banksy",             pista:"anónimo",        categoria:"cultura" },
+  { palabra:"El Mundial",         pista:"sede",           categoria:"cultura" },
+  { palabra:"Bitcoin",            pista:"minería",        categoria:"cultura" },
+  { palabra:"Netflix",            pista:"algoritmo",      categoria:"cultura" },
+  { palabra:"La Biblia",          pista:"Gutenberg",      categoria:"cultura" },
+  { palabra:"La ONU",             pista:"veto",           categoria:"cultura" },
+  { palabra:"Area 51",            pista:"hangar",         categoria:"cultura" },
+  { palabra:"Woodstock",          pista:"Hendrix",        categoria:"cultura" },
+  { palabra:"La CIA",             pista:"operación",      categoria:"cultura" },
+  { palabra:"El Louvre",          pista:"pirámide",       categoria:"cultura" },
+  { palabra:"Interestelar",       pista:"Gargantúa",      categoria:"cultura" },
+  { palabra:"TikTok",             pista:"algoritmo",      categoria:"cultura" },
+
+  // ── Lugares / monumentos ──
+  { palabra:"La Torre Eiffel",    pista:"hierro",         categoria:"lugar" },
+  { palabra:"La Gran Muralla",    pista:"dragón",         categoria:"lugar" },
+  { palabra:"Machu Picchu",       pista:"inca",           categoria:"lugar" },
+  { palabra:"El Coliseo",         pista:"gladiador",      categoria:"lugar" },
+  { palabra:"La Sagrada Familia", pista:"inconclusa",     categoria:"lugar" },
+  { palabra:"El Taj Mahal",       pista:"luto",           categoria:"lugar" },
+  { palabra:"Stonehenge",         pista:"solsticio",      categoria:"lugar" },
+  { palabra:"La Estatua de la Libertad", pista:"cobre",   categoria:"lugar" },
+  { palabra:"Chichen Itzá",       pista:"equinoccio",     categoria:"lugar" },
+  { palabra:"Petra",              pista:"nabateo",        categoria:"lugar" },
+  { palabra:"Las Pirámides",      pista:"faraón",         categoria:"lugar" },
+  { palabra:"El Kremlin",         pista:"duma",           categoria:"lugar" },
+  { palabra:"La Casa Blanca",     pista:"ala",            categoria:"lugar" },
+  { palabra:"El Pentágono",       pista:"cinco",          categoria:"lugar" },
+  { palabra:"Alcatraz",           pista:"fuga",           categoria:"lugar" },
+];
+
+// ── Estado ──
+let numPlayers = 4, players = [], impostorIdx = 0, secretWord = null;
+let currentTurn = 0, selectedVote = null;
+let usedIndices = [];
+
+// ── Utilidades ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// Palabra aleatoria sin repetir hasta agotar la lista entera
+function pickWord() {
+  if (usedIndices.length >= palabras.length) usedIndices = [];
+  let idx;
+  do { idx = Math.floor(Math.random() * palabras.length); }
+  while (usedIndices.includes(idx));
+  usedIndices.push(idx);
+  return palabras[idx];
+}
+
+// ── Setup ──
+function changeNum(d) {
+  numPlayers = Math.min(10, Math.max(3, numPlayers + d));
+  document.getElementById('num-display').textContent = numPlayers;
+  renderInputs();
+}
+
+function renderInputs() {
+  const list = document.getElementById('names-list');
+  const existing = [...list.querySelectorAll('input')].map(i => i.value);
+  list.innerHTML = '';
+  for (let i = 0; i < numPlayers; i++) {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.placeholder = 'Jugador ' + (i + 1);
+    inp.value = existing[i] || '';
+    inp.maxLength = 20;
+    list.appendChild(inp);
+  }
+}
+
+function startGame() {
+  const inputs = [...document.querySelectorAll('#names-list input')];
+  players = inputs.map((inp, i) => inp.value.trim() || 'Jugador ' + (i + 1));
+  secretWord = pickWord();
+  impostorIdx = Math.floor(Math.random() * players.length);
+  currentTurn = 0;
+  selectedVote = null;
+  loadTurn();
+  show('s-turn');
+}
+
+// ── Progreso ──
+function renderProgress() {
+  const bar = document.getElementById('progress-bar');
+  bar.innerHTML = '';
+  players.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'progress-dot' + (i < currentTurn ? ' done' : i === currentTurn ? ' active' : '');
+    bar.appendChild(dot);
+  });
+}
+
+// ── Turno ──
+function loadTurn() {
+  renderProgress();
+  document.getElementById('turn-player-name').textContent = players[currentTurn];
+  document.getElementById('black-cover').style.display = 'flex';
+  document.getElementById('word-reveal').style.display = 'none';
+  document.getElementById('reveal-btn').style.display = 'block';
+  document.getElementById('hide-btn').style.display = 'none';
+}
+
+function revealWord() {
+  const isImpostor = (currentTurn === impostorIdx);
+  document.getElementById('word-reveal').style.display = 'flex';
+  document.getElementById('black-cover').style.display = 'none';
+  document.getElementById('reveal-btn').style.display = 'none';
+  document.getElementById('hide-btn').style.display = 'block';
+
+  const wordEl  = document.getElementById('reveal-word');
+  const labelEl = document.getElementById('reveal-label');
+  const badgeEl = document.getElementById('reveal-badge');
+
+  if (isImpostor) {
+    labelEl.textContent = 'Tu pista (eres el impostor)';
+    wordEl.textContent  = secretWord.pista;
+    wordEl.className    = 'reveal-word impostor';
+    badgeEl.textContent = '🕵️ Eres el impostor';
+    badgeEl.className   = 'reveal-badge impostor';
+  } else {
+    labelEl.textContent = 'Tu palabra secreta';
+    wordEl.textContent  = secretWord.palabra;
+    wordEl.className    = 'reveal-word normal';
+    badgeEl.textContent = '✓ Jugador normal';
+    badgeEl.className   = 'reveal-badge normal';
+  }
+}
+
+function nextTurn() {
+  currentTurn++;
+  if (currentTurn >= players.length) { show('s-discuss'); return; }
+  loadTurn();
+}
+
+// ── Votación ──
+function goToVote() {
+  selectedVote = null;
+  const list = document.getElementById('vote-list');
+  list.innerHTML = '';
+  players.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'vote-item';
+    div.dataset.player = p;
+    div.innerHTML = '<span>' + p + '</span><span class="vote-check"></span>';
+    div.onclick = () => selectVote(p);
+    list.appendChild(div);
+  });
+  document.getElementById('vote-confirm').disabled = true;
+  show('s-vote');
+}
+
+function selectVote(player) {
+  selectedVote = player;
+  document.querySelectorAll('.vote-item').forEach(el => {
+    const sel = el.dataset.player === player;
+    el.classList.toggle('selected', sel);
+    el.querySelector('.vote-check').textContent = sel ? '✓' : '';
+  });
+  document.getElementById('vote-confirm').disabled = false;
+}
+
+// ── Resultado ──
+function showResult() {
+  if (!selectedVote) return;
+  const correct = (selectedVote === players[impostorIdx]);
+  document.getElementById('r-emoji').textContent    = correct ? '🎉' : '😈';
+  document.getElementById('r-outcome').textContent  = correct ? '¡Atraparon al impostor!' : '¡El impostor escapó!';
+  document.getElementById('r-outcome').className    = 'result-outcome ' + (correct ? 'win' : 'lose');
+  document.getElementById('r-sub').textContent      = correct ? 'Buen trabajo, detectives.' : 'El impostor los engañó a todos.';
+  document.getElementById('r-voted').textContent    = selectedVote;
+  document.getElementById('r-impostor').textContent = players[impostorIdx];
+  document.getElementById('r-word').textContent     = secretWord.palabra;
+  document.getElementById('r-cat').textContent      = secretWord.categoria;
+  document.getElementById('r-hint').textContent     = secretWord.pista;
+  show('s-result');
+}
+
+function restart() {
+  selectedVote = null;
+  show('s-setup');
+}
+
+renderInputs();
+</script>
+</body>
+</html>
