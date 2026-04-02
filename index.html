@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -12,83 +13,85 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
   html, body { height: 100%; background: #0e0e12; color: #f0effe; font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif; overflow-x: hidden; }
 
-  .screen { display: none; flex-direction: column; min-height: 100svh; padding: 48px 24px 40px; }
-  .screen.active { display: flex; }
+.screen { display: none; flex-direction: column; min-height: 100svh; padding: 48px 24px 40px; }
+.screen.active { display: flex; }
 
-  .logo { text-align: center; margin-bottom: 4px; }
-  .logo-icon { font-size: 56px; }
-  h1 { font-size: 32px; font-weight: 700; text-align: center; letter-spacing: -0.5px; color: #c4bfff; margin-bottom: 4px; }
-  .tagline { font-size: 15px; color: #7a7596; text-align: center; margin-bottom: 36px; }
-  .section-label { font-size: 13px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+.logo { text-align: center; margin-bottom: 4px; }
+.logo-icon { font-size: 56px; }
+h1 { font-size: 32px; font-weight: 700; text-align: center; letter-spacing: -0.5px; color: #c4bfff; margin-bottom: 4px; }
+.tagline { font-size: 15px; color: #7a7596; text-align: center; margin-bottom: 36px; }
+.section-label { font-size: 13px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
 
-  .number-selector { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 32px; background: #1a1a24; border-radius: 20px; padding: 16px; }
-  .num-btn { width: 56px; height: 56px; border-radius: 50%; font-size: 26px; font-weight: 500; border: 1.5px solid #3a3555; background: #252535; color: #c4bfff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .num-btn:active { background: #3a3555; }
-  #num-display { font-size: 40px; font-weight: 700; min-width: 56px; text-align: center; color: #fff; }
+.number-selector { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 32px; background: #1a1a24; border-radius: 20px; padding: 16px; }
+.num-btn { width: 56px; height: 56px; border-radius: 50%; font-size: 26px; font-weight: 500; border: 1.5px solid #3a3555; background: #252535; color: #c4bfff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.num-btn:active { background: #3a3555; }
+#num-display { font-size: 40px; font-weight: 700; min-width: 56px; text-align: center; color: #fff; }
 
-  .input-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-  .input-list input { padding: 15px 18px; border-radius: 14px; border: 1.5px solid #2a2a3a; background: #1a1a24; color: #f0effe; font-size: 17px; font-family: inherit; outline: none; user-select: text; -webkit-user-select: text; }
-  .input-list input::placeholder { color: #4a4666; }
-  .input-list input:focus { border-color: #7F77DD; background: #1e1d2e; }
+.input-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.input-list input { padding: 15px 18px; border-radius: 14px; border: 1.5px solid #2a2a3a; background: #1a1a24; color: #f0effe; font-size: 17px; font-family: inherit; outline: none; user-select: text; -webkit-user-select: text; }
+.input-list input::placeholder { color: #4a4666; }
+.input-list input:focus { border-color: #7F77DD; background: #1e1d2e; }
 
-  .btn { width: 100%; padding: 17px; border-radius: 16px; font-size: 17px; font-weight: 600; border: none; cursor: pointer; margin-bottom: 12px; transition: transform .1s, opacity .1s; font-family: inherit; }
-  .btn:active { transform: scale(0.97); opacity: .85; }
-  .btn.primary { background: #534AB7; color: #fff; }
-  .btn.secondary { background: #1a1a24; color: #c4bfff; border: 1.5px solid #3a3555; }
-  .btn.success { background: #0F6E56; color: #e1f5ee; }
-  .btn:disabled { opacity: .35; pointer-events: none; }
+.btn { width: 100%; padding: 17px; border-radius: 16px; font-size: 17px; font-weight: 600; border: none; cursor: pointer; margin-bottom: 12px; transition: transform .1s, opacity .1s; font-family: inherit; }
+.btn:active { transform: scale(0.97); opacity: .85; }
+.btn.primary { background: #534AB7; color: #fff; }
+.btn.secondary { background: #1a1a24; color: #c4bfff; border: 1.5px solid #3a3555; }
+.btn.success { background: #0F6E56; color: #e1f5ee; }
+.btn:disabled { opacity: .35; pointer-events: none; }
 
-  .progress-bar { display: flex; gap: 6px; margin-bottom: 28px; }
-  .progress-dot { flex: 1; height: 4px; border-radius: 99px; background: #2a2a3a; }
-  .progress-dot.done { background: #7F77DD; }
-  .progress-dot.active { background: #c4bfff; }
+.progress-bar { display: flex; gap: 6px; margin-bottom: 28px; }
+.progress-dot { flex: 1; height: 4px; border-radius: 99px; background: #2a2a3a; }
+.progress-dot.done { background: #7F77DD; }
+.progress-dot.active { background: #c4bfff; }
 
-  .player-card { background: #1a1a24; border-radius: 20px; padding: 20px 24px; text-align: center; margin-bottom: 24px; border: 1.5px solid #2a2a3a; }
-  .player-label { font-size: 12px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
-  .player-name { font-size: 26px; font-weight: 700; color: #fff; }
+.player-card { background: #1a1a24; border-radius: 20px; padding: 20px 24px; text-align: center; margin-bottom: 24px; border: 1.5px solid #2a2a3a; }
+.player-label { font-size: 12px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+.player-name { font-size: 26px; font-weight: 700; color: #fff; }
 
-  .cover-box { background: #000; border-radius: 20px; padding: 32px 24px; text-align: center; margin-bottom: 24px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
-  .cover-box .cover-icon { font-size: 48px; }
-  .cover-box .cover-title { font-size: 19px; font-weight: 600; color: #fff; }
-  .cover-box .cover-sub { font-size: 14px; color: #555; }
+.cover-box { background: #000; border-radius: 20px; padding: 32px 24px; text-align: center; margin-bottom: 24px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.cover-box .cover-icon { font-size: 48px; }
+.cover-box .cover-title { font-size: 19px; font-weight: 600; color: #fff; }
+.cover-box .cover-sub { font-size: 14px; color: #555; }
 
-  .reveal-box { background: #1a1a24; border-radius: 20px; padding: 36px 24px; text-align: center; margin-bottom: 24px; flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; border: 1.5px solid #3a3555; }
-  .reveal-label { font-size: 13px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
-  .reveal-word { font-size: 40px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; line-height: 1.1; }
-  .reveal-word.normal { color: #c4bfff; }
-  .reveal-word.impostor { color: #F0997B; }
-  .reveal-badge { display: inline-block; padding: 5px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
-  .reveal-badge.normal { background: #1e1d40; color: #9992d8; }
-  .reveal-badge.impostor { background: #2a1510; color: #F0997B; }
+.reveal-box { background: #1a1a24; border-radius: 20px; padding: 36px 24px; text-align: center; margin-bottom: 24px; flex: 1; display: none; flex-direction: column; align-items: center; justify-content: center; border: 1.5px solid #3a3555; }
+.reveal-label { font-size: 13px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+.reveal-word { font-size: 40px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; line-height: 1.1; }
+.reveal-word.normal { color: #c4bfff; }
+.reveal-word.impostor { color: #F0997B; }
+.reveal-badge { display: inline-block; padding: 5px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
+.reveal-badge.normal { background: #1e1d40; color: #9992d8; }
+.reveal-badge.impostor { background: #2a1510; color: #F0997B; }
 
-  .discuss-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
-  .discuss-icon { font-size: 72px; }
-  .discuss-title { font-size: 26px; font-weight: 700; color: #fff; }
-  .discuss-body { font-size: 16px; color: #7a7596; line-height: 1.6; max-width: 300px; }
+.discuss-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 16px; }
+.discuss-icon { font-size: 72px; }
+.discuss-title { font-size: 26px; font-weight: 700; color: #fff; }
+.discuss-body { font-size: 16px; color: #7a7596; line-height: 1.6; max-width: 300px; }
 
-  .vote-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-  .vote-item { display: flex; align-items: center; padding: 18px 20px; border-radius: 16px; border: 1.5px solid #2a2a3a; background: #1a1a24; cursor: pointer; font-size: 18px; font-weight: 500; color: #d0cdf5; }
-  .vote-item:active { background: #252535; }
-  .vote-item.selected { border-color: #7F77DD; background: #1e1d40; color: #fff; }
-  .vote-item .vote-check { margin-left: auto; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #3a3555; background: #252535; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
-  .vote-item.selected .vote-check { background: #534AB7; border-color: #7F77DD; color: #fff; }
+.vote-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.vote-item { display: flex; align-items: center; padding: 18px 20px; border-radius: 16px; border: 1.5px solid #2a2a3a; background: #1a1a24; cursor: pointer; font-size: 18px; font-weight: 500; color: #d0cdf5; }
+.vote-item:active { background: #252535; }
+.vote-item.selected { border-color: #7F77DD; background: #1e1d40; color: #fff; }
+.vote-item .vote-check { margin-left: auto; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #3a3555; background: #252535; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.vote-item.selected .vote-check { background: #534AB7; border-color: #7F77DD; color: #fff; }
 
-  .result-hero { background: #1a1a24; border-radius: 20px; padding: 28px 20px; text-align: center; margin-bottom: 14px; border: 1.5px solid #2a2a3a; }
-  .result-emoji { font-size: 56px; margin-bottom: 8px; }
-  .result-outcome { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-  .result-outcome.win { color: #5DCAA5; }
-  .result-outcome.lose { color: #F0997B; }
-  .result-sub { font-size: 14px; color: #7a7596; }
+.result-hero { background: #1a1a24; border-radius: 20px; padding: 28px 20px; text-align: center; margin-bottom: 14px; border: 1.5px solid #2a2a3a; }
+.result-emoji { font-size: 56px; margin-bottom: 8px; }
+.result-outcome { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.result-outcome.win { color: #5DCAA5; }
+.result-outcome.lose { color: #F0997B; }
+.result-sub { font-size: 14px; color: #7a7596; }
 
-  .result-row { background: #1a1a24; border-radius: 16px; padding: 16px 20px; margin-bottom: 10px; border: 1.5px solid #2a2a3a; }
-  .result-row-label { font-size: 12px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
-  .result-row-value { font-size: 20px; font-weight: 700; color: #fff; }
-  .result-row-hint { font-size: 13px; color: #7a7596; margin-top: 3px; }
+.result-row { background: #1a1a24; border-radius: 16px; padding: 16px 20px; margin-bottom: 10px; border: 1.5px solid #2a2a3a; }
+.result-row-label { font-size: 12px; font-weight: 600; color: #7a7596; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+.result-row-value { font-size: 20px; font-weight: 700; color: #fff; }
+.result-row-hint { font-size: 13px; color: #7a7596; margin-top: 3px; }
 </style>
+
 </head>
 <body>
 
 <!-- ══ SETUP ══ -->
+
 <div id="s-setup" class="screen active">
   <div class="logo"><span class="logo-icon">🎭</span></div>
   <h1>Fake It</h1>
@@ -105,6 +108,7 @@
 </div>
 
 <!-- ══ TURNO ══ -->
+
 <div id="s-turn" class="screen">
   <div class="progress-bar" id="progress-bar"></div>
   <div class="player-card">
@@ -126,6 +130,7 @@
 </div>
 
 <!-- ══ DISCUSIÓN ══ -->
+
 <div id="s-discuss" class="screen">
   <div class="discuss-center">
     <span class="discuss-icon">💬</span>
@@ -136,6 +141,7 @@
 </div>
 
 <!-- ══ VOTACIÓN ══ -->
+
 <div id="s-vote" class="screen">
   <h1 style="font-size:26px;margin-bottom:6px;text-align:left">Votación</h1>
   <p style="font-size:15px;color:#7a7596;margin-bottom:24px">Elijan juntos quién creen que es el impostor</p>
@@ -144,6 +150,7 @@
 </div>
 
 <!-- ══ RESULTADO ══ -->
+
 <div id="s-result" class="screen">
   <h1 style="font-size:26px;margin-bottom:20px;text-align:left">Resultado</h1>
   <div class="result-hero">
@@ -168,131 +175,60 @@
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-//  Regla de pistas: UNA sola palabra, no obvia.
-//  Debe relacionarse con la palabra pero no describirla
-//  directamente — el impostor puede blufear con ella.
-// ══════════════════════════════════════════════════════
 const palabras = [
+  // ── Películas ──
+  { palabra:"Titanic",                    pista:"Rose",          categoria:"película" },
+  { palabra:"El Rey León",               pista:"cicatriz",      categoria:"película" },
+  { palabra:"Jurassic Park",             pista:"ámbar",         categoria:"película" },
+  { palabra:"Matrix",                    pista:"pastilla",      categoria:"película" },
+  { palabra:"Forrest Gump",              pista:"banca",         categoria:"película" },
+  { palabra:"El Señor de los Anillos",   pista:"dedo",          categoria:"película" },
+  { palabra:"Toy Story",                 pista:"vaquero",       categoria:"película" },
+  { palabra:"Up",                        pista:"globos",        categoria:"película" },
+  { palabra:"El Padrino",                pista:"oferta",        categoria:"película" },
+  { palabra:"Avengers",                  pista:"guantelete",    categoria:"película" },
+  { palabra:"Shrek",                     pista:"pantano",       categoria:"película" },
+  { palabra:"Coco",                      pista:"marigold",      categoria:"película" },
+  { palabra:"Interestelar",              pista:"reloj",         categoria:"película" },
+  { palabra:"El Silencio de los Inocentes", pista:"cena",       categoria:"película" },
+  { palabra:"Gladiador",                 pista:"arena",         categoria:"película" },
+  { palabra:"Pulp Fiction",              pista:"maletín",       categoria:"película" },
+  { palabra:"Beetlejuice",               pista:"rayado",        categoria:"película" },
+  { palabra:"Psicosis",                  pista:"ducha",         categoria:"película" },
+  { palabra:"La La Land",               pista:"audición",      categoria:"película" },
+  { palabra:"Parasite",                  pista:"semisótano",    categoria:"película" },
 
-  // ── Personajes conocidos ──
-  { palabra:"Cleopatra",          pista:"serpiente",      categoria:"personaje" },
-  { palabra:"Einstein",           pista:"patente",        categoria:"personaje" },
-  { palabra:"Napoleón",           pista:"isla",           categoria:"personaje" },
-  { palabra:"Frida Kahlo",        pista:"columna",        categoria:"personaje" },
-  { palabra:"Gandhi",             pista:"ayuno",          categoria:"personaje" },
-  { palabra:"Shakespeare",        pista:"Globe",          categoria:"personaje" },
-  { palabra:"Marie Curie",        pista:"radiación",      categoria:"personaje" },
-  { palabra:"Nikola Tesla",       pista:"bobina",         categoria:"personaje" },
-  { palabra:"Darwin",             pista:"Galápagos",      categoria:"personaje" },
-  { palabra:"Julio César",        pista:"senado",         categoria:"personaje" },
-  { palabra:"Simón Bolívar",      pista:"libertador",     categoria:"personaje" },
-  { palabra:"Leonardo da Vinci",  pista:"espejo",         categoria:"personaje" },
-  { palabra:"Mozart",             pista:"niño",           categoria:"personaje" },
-  { palabra:"Juana de Arco",      pista:"llamas",         categoria:"personaje" },
-  { palabra:"Marco Polo",         pista:"seda",           categoria:"personaje" },
-
-  // ── Personajes ficción / pop ──
-  { palabra:"Sherlock Holmes",    pista:"violín",         categoria:"ficción" },
-  { palabra:"Darth Vader",        pista:"traición",       categoria:"ficción" },
-  { palabra:"James Bond",         pista:"Aston",          categoria:"ficción" },
-  { palabra:"El Joker",           pista:"naipes",         categoria:"ficción" },
-  { palabra:"Walter White",       pista:"sótano",         categoria:"ficción" },
-  { palabra:"Harry Potter",       pista:"cicatriz",       categoria:"ficción" },
-  { palabra:"Don Quijote",        pista:"molino",         categoria:"ficción" },
-  { palabra:"El Padrino",         pista:"caballo",        categoria:"ficción" },
-  { palabra:"Hermione Granger",   pista:"tiempo",         categoria:"ficción" },
-  { palabra:"Tony Stark",         pista:"reactor",        categoria:"ficción" },
-  { palabra:"Gollum",             pista:"cueva",          categoria:"ficción" },
-  { palabra:"Hannibal Lecter",    pista:"máscara",        categoria:"ficción" },
-  { palabra:"Indiana Jones",      pista:"látigo",         categoria:"ficción" },
-  { palabra:"Katniss Everdeen",   pista:"tributo",        categoria:"ficción" },
-  { palabra:"Batman",             pista:"murciélago",     categoria:"ficción" },
-
-  // ── Eventos mundiales ──
-  { palabra:"Chernóbil",          pista:"grafito",        categoria:"evento" },
-  { palabra:"El Titanic",         pista:"iceberg",        categoria:"evento" },
-  { palabra:"La Guerra Fría",     pista:"cortina",        categoria:"evento" },
-  { palabra:"La Revolución Francesa", pista:"guillotina", categoria:"evento" },
-  { palabra:"El Muro de Berlín",  pista:"maza",           categoria:"evento" },
-  { palabra:"La Gran Depresión",  pista:"quiebre",        categoria:"evento" },
-  { palabra:"Hiroshima",          pista:"hongo",          categoria:"evento" },
-  { palabra:"Watergate",          pista:"grabación",      categoria:"evento" },
-  { palabra:"La Pandemia",        pista:"variante",       categoria:"evento" },
-  { palabra:"El Renacimiento",    pista:"mecenas",        categoria:"evento" },
-  { palabra:"La Conquista",       pista:"Tenochtitlan",   categoria:"evento" },
-  { palabra:"La Inquisición",     pista:"confesión",      categoria:"evento" },
-  { palabra:"La Primavera Árabe", pista:"tunesino",       categoria:"evento" },
-  { palabra:"La Revolución Industrial", pista:"vapor",    categoria:"evento" },
-  { palabra:"El Apartheid",       pista:"Mandela",        categoria:"evento" },
-
-  // ── Ciudades ──
-  { palabra:"Venecia",            pista:"góndola",        categoria:"ciudad" },
-  { palabra:"Tokio",              pista:"shibuya",        categoria:"ciudad" },
-  { palabra:"Dubái",              pista:"petróleo",       categoria:"ciudad" },
-  { palabra:"La Habana",          pista:"tabaco",         categoria:"ciudad" },
-  { palabra:"Estambul",           pista:"bósforo",        categoria:"ciudad" },
-  { palabra:"Praga",              pista:"alquimia",       categoria:"ciudad" },
-  { palabra:"Amsterdam",          pista:"tulipán",        categoria:"ciudad" },
-  { palabra:"Buenos Aires",       pista:"milonga",        categoria:"ciudad" },
-  { palabra:"Singapur",           pista:"multa",          categoria:"ciudad" },
-  { palabra:"Moscú",              pista:"zar",            categoria:"ciudad" },
-  { palabra:"Marrakech",          pista:"zoco",           categoria:"ciudad" },
-  { palabra:"Reikiavik",          pista:"aurora",         categoria:"ciudad" },
-  { palabra:"El Vaticano",        pista:"cónclave",       categoria:"ciudad" },
-  { palabra:"Río de Janeiro",     pista:"favela",         categoria:"ciudad" },
-  { palabra:"Mumbai",             pista:"dabbawala",      categoria:"ciudad" },
-
-  // ── Ciencia y conceptos ──
-  { palabra:"Agujero negro",      pista:"horizonte",      categoria:"ciencia" },
-  { palabra:"ADN",                pista:"nucleótido",     categoria:"ciencia" },
-  { palabra:"Vacuna",             pista:"antígeno",       categoria:"ciencia" },
-  { palabra:"Evolución",          pista:"adaptación",     categoria:"ciencia" },
-  { palabra:"Gravedad",           pista:"curvatura",      categoria:"ciencia" },
-  { palabra:"Big Bang",           pista:"expansión",      categoria:"ciencia" },
-  { palabra:"Clonación",          pista:"oveja",          categoria:"ciencia" },
-  { palabra:"Inteligencia Artificial", pista:"neuronal",  categoria:"ciencia" },
-  { palabra:"Efecto invernadero", pista:"metano",         categoria:"ciencia" },
-  { palabra:"Fotosíntesis",       pista:"cloroplasto",    categoria:"ciencia" },
-  { palabra:"Relatividad",        pista:"gemelo",         categoria:"ciencia" },
-  { palabra:"Blockchain",         pista:"nodo",           categoria:"ciencia" },
-  { palabra:"Cuántica",           pista:"superposición",  categoria:"ciencia" },
-  { palabra:"Antimateria",        pista:"colisionador",   categoria:"ciencia" },
-  { palabra:"Neurona",            pista:"sinapsis",       categoria:"ciencia" },
-
-  // ── Cultura general ──
-  { palabra:"Los Juegos Olímpicos", pista:"tregua",       categoria:"cultura" },
-  { palabra:"El Oscar",           pista:"academia",       categoria:"cultura" },
-  { palabra:"La Mona Lisa",       pista:"Louvre",         categoria:"cultura" },
-  { palabra:"Banksy",             pista:"anónimo",        categoria:"cultura" },
-  { palabra:"El Mundial",         pista:"sede",           categoria:"cultura" },
-  { palabra:"Bitcoin",            pista:"minería",        categoria:"cultura" },
-  { palabra:"Netflix",            pista:"algoritmo",      categoria:"cultura" },
-  { palabra:"La Biblia",          pista:"Gutenberg",      categoria:"cultura" },
-  { palabra:"La ONU",             pista:"veto",           categoria:"cultura" },
-  { palabra:"Area 51",            pista:"hangar",         categoria:"cultura" },
-  { palabra:"Woodstock",          pista:"Hendrix",        categoria:"cultura" },
-  { palabra:"La CIA",             pista:"operación",      categoria:"cultura" },
-  { palabra:"El Louvre",          pista:"pirámide",       categoria:"cultura" },
-  { palabra:"Interestelar",       pista:"Gargantúa",      categoria:"cultura" },
-  { palabra:"TikTok",             pista:"algoritmo",      categoria:"cultura" },
-
-  // ── Lugares / monumentos ──
-  { palabra:"La Torre Eiffel",    pista:"hierro",         categoria:"lugar" },
-  { palabra:"La Gran Muralla",    pista:"dragón",         categoria:"lugar" },
-  { palabra:"Machu Picchu",       pista:"inca",           categoria:"lugar" },
-  { palabra:"El Coliseo",         pista:"gladiador",      categoria:"lugar" },
-  { palabra:"La Sagrada Familia", pista:"inconclusa",     categoria:"lugar" },
-  { palabra:"El Taj Mahal",       pista:"luto",           categoria:"lugar" },
-  { palabra:"Stonehenge",         pista:"solsticio",      categoria:"lugar" },
-  { palabra:"La Estatua de la Libertad", pista:"cobre",   categoria:"lugar" },
-  { palabra:"Chichen Itzá",       pista:"equinoccio",     categoria:"lugar" },
-  { palabra:"Petra",              pista:"nabateo",        categoria:"lugar" },
-  { palabra:"Las Pirámides",      pista:"faraón",         categoria:"lugar" },
-  { palabra:"El Kremlin",         pista:"duma",           categoria:"lugar" },
-  { palabra:"La Casa Blanca",     pista:"ala",            categoria:"lugar" },
-  { palabra:"El Pentágono",       pista:"cinco",          categoria:"lugar" },
-  { palabra:"Alcatraz",           pista:"fuga",           categoria:"lugar" },
+  // ── Vida diaria ──
+  { palabra:"Despertador",               pista:"snooze",        categoria:"diario" },
+  { palabra:"Café",                      pista:"ritual",        categoria:"diario" },
+  { palabra:"Semáforo",                  pista:"impaciente",    categoria:"diario" },
+  { palabra:"Elevador",                  pista:"silencio",      categoria:"diario" },
+  { palabra:"Supermercado",              pista:"carrito",       categoria:"diario" },
+  { palabra:"Tráfico",                   pista:"bocina",        categoria:"diario" },
+  { palabra:"Lavadora",                  pista:"centrifuga",    categoria:"diario" },
+  { palabra:"Factura",                   pista:"vencimiento",   categoria:"diario" },
+  { palabra:"Dentista",                  pista:"babero",        categoria:"diario" },
+  { palabra:"Gimnasio",                  pista:"espejo",        categoria:"diario" },
+  { palabra:"Pijama",                    pista:"domingo",       categoria:"diario" },
+  { palabra:"Nevera",                    pista:"antojo",        categoria:"diario" },
+  { palabra:"Control remoto",            pista:"perdido",       categoria:"diario" },
+  { palabra:"Auriculares",               pista:"burbuja",       categoria:"diario" },
+  { palabra:"Contraseña",                pista:"olvidada",      categoria:"diario" },
+  { palabra:"Cargador",                  pista:"angustia",      categoria:"diario" },
+  { palabra:"Lista del super",           pista:"olvido",        categoria:"diario" },
+  { palabra:"Reunión de trabajo",        pista:"bostezo",       categoria:"diario" },
+  { palabra:"Vecino",                    pista:"ruido",         categoria:"diario" },
+  { palabra:"Mascota",                   pista:"culpa",         categoria:"diario" },
+  { palabra:"Cumpleaños",                pista:"velita",        categoria:"diario" },
+  { palabra:"Paraguas",                  pista:"inútil",        categoria:"diario" },
+  { palabra:"Postre",                    pista:"negación",      categoria:"diario" },
+  { palabra:"Alarma",                    pista:"ignorar",       categoria:"diario" },
+  { palabra:"Pedicure",                  pista:"vergüenza",     categoria:"diario" },
+  { palabra:"Cola del banco",            pista:"eternidad",     categoria:"diario" },
+  { palabra:"Selfie",                    pista:"intento",       categoria:"diario" },
+  { palabra:"Resaca",                    pista:"promesa",       categoria:"diario" },
+  { palabra:"Dieta",                     pista:"lunes",         categoria:"diario" },
+  { palabra:"Siesta",                    pista:"culpable",      categoria:"diario" },
 ];
 
 // ── Estado ──
@@ -307,7 +243,6 @@ function show(id) {
   window.scrollTo(0, 0);
 }
 
-// Palabra aleatoria sin repetir hasta agotar la lista entera
 function pickWord() {
   if (usedIndices.length >= palabras.length) usedIndices = [];
   let idx;
@@ -452,5 +387,6 @@ function restart() {
 
 renderInputs();
 </script>
+
 </body>
 </html>
